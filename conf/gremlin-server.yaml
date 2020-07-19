@@ -15,7 +15,8 @@
 host: 0.0.0.0
 port: 8182
 scriptEvaluationTimeout: 30000
-channelizer: org.apache.tinkerpop.gremlin.server.channel.WebSocketChannelizer
+channelizer: org.apache.tinkerpop.gremlin.server.channel.WsAndHttpChannelizer
+
 graphs: {
   graph: /etc/opt/janusgraph/janusgraph.properties
 }
@@ -55,16 +56,13 @@ maxAccumulationBufferComponents: 1024
 resultIterationBatchSize: 64
 writeBufferLowWaterMark: 32768
 writeBufferHighWaterMark: 65536
-
-threadPoolWorker: 1
-gremlinPool: 8
-
 authentication: {
-   authenticator: org.janusgraph.graphdb.tinkerpop.gremlin.server.auth.JanusGraphSimpleAuthenticator,
-   authenticationHandler: org.apache.tinkerpop.gremlin.server.handler.HttpBasicAuthenticationHandler,
-   config: {
-     defaultUsername: user,
-     defaultPassword: password,
-     credentialsDb: /etc/opt/janusgraph/janusgraph-credentials-server.properties
-    }
- }
+  authenticator: org.janusgraph.graphdb.tinkerpop.gremlin.server.auth.SaslAndHMACAuthenticator,
+  authenticationHandler: org.janusgraph.graphdb.tinkerpop.gremlin.server.handler.SaslAndHMACAuthenticationHandler,
+  config: {
+    defaultUsername: user,
+    defaultPassword: password,
+    hmacSecret: secret,
+    credentialsDb: /etc/opt/janusgraph/janusgraph-credentials-server.properties
+  }
+}
