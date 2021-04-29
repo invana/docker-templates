@@ -8,4 +8,4 @@ Quick links: [docs](https://docs.invana.io) | [support](http://invana.io/support
 
 ## Support
 
-For any further assistance, get in touch with us at hi [at] invana.io
+For any further assistance, get in touch with us [https://invana.io/contact](https://invana.io/contact)
