@@ -4,7 +4,6 @@ services:
   graph-db:
     image: docker.io/janusgraph/janusgraph:latest
     container_name: janusgraph-instance-2
-    restart: always
     ports:
       - "8182:8182"
     volumes:
@@ -12,10 +11,15 @@ services:
       - "./conf:/etc/opt/janusgraph/:ro"
     networks:
       - jce-network-1
+    healthcheck:
+      test: ["CMD", "bin/gremlin.sh", "-e", "scripts/remote-connect.groovy"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
 
   cassandra:
     image: cassandra:3
-    container_name: janusgraph-cassandra-2
+    container_name: jce-cassandra-2
     ports:
       - "9042:9042"
       - "9160:9160"
@@ -24,7 +28,7 @@ services:
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.6.0
-    container_name: janusgraph-elasticsearch-2
+    container_name: jce-elastic-2
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - "http.host=0.0.0.0"
@@ -40,3 +44,6 @@ services:
 
 networks:
   jce-network-1:
+
+volumes:
+  janusgraph-default-data:
