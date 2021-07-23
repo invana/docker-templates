@@ -6,7 +6,7 @@ volumes:
 services:
   graph-db:
     image: docker.io/janusgraph/janusgraph:latest
-    container_name: invana-jg-janusgraph-2
+    container_name: invana-jce-janusgraph-1
     restart: always
     ports:
         - "8182:8182"
@@ -16,7 +16,7 @@ services:
 
   invana-engine:
     image: invanalabs/invana-engine
-    container_name: invana-jg-invana-engine-2
+    container_name: invana-jce-invana-engine-1
     restart: always
     ports:
       - "8200:8200"
@@ -27,7 +27,7 @@ services:
 
   invana-studio:
     image: invanalabs/invana-studio
-    container_name: invana-jg-invana-studio-2
+    container_name: invana-jce-invana-studio-1
     ports:
       - "8888:8888"
 

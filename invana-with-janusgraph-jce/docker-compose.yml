@@ -3,7 +3,7 @@ version: '3'
 services:
   graph-db:
     image: docker.io/janusgraph/janusgraph:latest
-    container_name: invana-jg-janusgraph-2
+    container_name: invana-jce-janusgraph-1
     restart: always
     ports:
         - "8182:8182"
