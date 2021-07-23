@@ -30,5 +30,5 @@ services:
     image: invanalabs/invana-studio
     container_name: invana-neo4j-invana-studio-1
     ports:
-      - "8888:8888"
+      - "8300:8300"
 

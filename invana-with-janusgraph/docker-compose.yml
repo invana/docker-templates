@@ -40,7 +40,7 @@ services:
 
   invana-engine:
     image: invanalabs/invana-engine
-    container_name: invana-jg-invana-engine-2
+    container_name: invana-jce-invana-engine-1
     restart: always
     ports:
       - "8200:8200"
@@ -51,9 +51,9 @@ services:
 
   invana-studio:
     image: invanalabs/invana-studio
-    container_name: invana-jg-invana-studio-2
+    container_name: invana-jce-invana-studio-1
     ports:
-      - "8888:8888"
+      - "8300:8300"
     networks:
       - invana-jce-network-1
 
