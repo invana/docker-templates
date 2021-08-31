@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  graph-db:
+    image: arcadedata/arcadedb:latest
+    container_name: invana-arcadedb-instance-1
+    restart: always
+
+  gremlin-server:
+    image: tinkerpop/gremlin-server
+    container_name: invana-arcadedb-gremlin-server-1
+    restart: always
+    environment:
+      - GREMLIN_SERVER_URL=ws://graph-db:8182/gremlin
+    depends_on:
+      - "graph-db"
+    volumes:
+      - ./shared:/mnt/shared
+
+  invana-engine:
+    image: invanalabs/invana-engine
+    container_name: invana-arcadedb-invana-engine-1
+    restart: always
+    ports:
+      - "8200:8200"
+    environment:
+      - GREMLIN_SERVER_URL=ws://gremlin-server:8182/gremlin
+    depends_on:
+      - "gremlin-server"
+
+  invana-studio:
+    image: invanalabs/invana-studio
+    container_name: invana-arcadedb-invana-studio-1
+    ports:
+      - "8300:8300"
+
