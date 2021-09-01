@@ -5,6 +5,8 @@ services:
     image: arcadedata/arcadedb:latest
     container_name: invana-arcadedb-instance-1
     restart: always
+    environment:
+      - arcadedb.server.rootPassword=invanastudio
 
   gremlin-server:
     image: tinkerpop/gremlin-server
